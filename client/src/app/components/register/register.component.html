@@ -1,0 +1,71 @@
+<h2 class="page-header">Register</h2>
+
+<form [formGroup]="form" (submit)="register()">
+  <div class="form-group" [ngClass]="{'has-error': (form.controls.name.errors && form.controls.name.dirty) ||
+     !validUsername && form.controls['name'].dirty}">
+    <label>Name</label>
+    <input type="text" class="form-control" formControlName="name">
+    <ul style="color: red; list-style: none;">
+      <li *ngIf="form.controls['name'].errors?.required && form.controls['name'].dirty">
+         This field is required
+      </li>
+      <li *ngIf="(form.controls['name'].errors?.minlength && form.controls['name'].dirty) ||
+       (form.controls['name'].errors?.maxlength && form.controls['name'].dirty)">
+         Maximum characters: 30, Minimum characters 5
+      </li>
+      <li *ngIf="form.controls['name'].errors?.validUsername && form.controls['name'].dirty">
+        Name must not have any special characters
+      </li>
+    </ul>
+  </div>
+  <div class="form-group" [ngClass]="{'has-error': (form.controls.username.errors && form.controls.username.dirty) ||
+   (!validUsername && form.controls['username'].dirty)}">
+    <label>Username</label>
+    <input type="text" class="form-control" formControlName="username">
+    <ul style="color: red; list-style: none;">
+      <li *ngIf="form.controls['username'].errors?.required && form.controls['username'].dirty">
+        This field is required
+      </li>
+      <li *ngIf="(form.controls['username'].errors?.minlength && form.controls['username'].dirty) ||
+           (form.controls['username'].errors?.maxlength && form.controls['username'].dirty)">
+        Maximum characters: 30, Minimum characters 5
+      </li>
+      <li *ngIf="form.controls['username'].errors?.validUsername && form.controls['username'].dirty">
+        Username must not have any special characters
+      </li>
+    </ul>
+
+  </div>
+  <div class="form-group" [ngClass]="{'has-error': (form.controls.email.errors && form.controls.email.dirty) ||
+   (!validEmail && form.controls['email'].dirty)}">
+    <label>Email</label>
+    <input type="text" class="form-control" formControlName="email">
+    <ul style="color: red; list-style: none;">
+      <li *ngIf="form.controls['email'].errors?.required && form.controls['email'].dirty">
+        This field is required
+      </li>
+      <li *ngIf="(form.controls['email'].errors?.minlength && form.controls['email'].dirty) ||
+               (form.controls['email'].errors?.maxlength && form.controls['email'].dirty)">
+        Maximum characters: 35, Minimum characters 8
+      </li>
+      <li *ngIf="form.controls['email'].errors?.validEmail && form.controls['email'].dirty">
+         This must be a valid e-mail
+      </li>
+    </ul>
+  </div>
+  <div class="form-group" [ngClass]="{'has-error': form.controls.password.errors && form.controls.password.dirty}">
+    <label>Password</label>
+    <input type="password" class="form-control" formControlName="password">
+    <ul style="color: red; list-style: none;">
+      <li *ngIf="form.controls['password'].errors?.required && form.controls['password'].dirty">
+        This field is required
+      </li>
+      <li *ngIf="(form.controls['password'].errors?.minlength && form.controls['password'].dirty) ||
+                   (form.controls['password'].errors?.maxlength && form.controls['password'].dirty)">
+        Maximum characters: 30, Minimum characters 6
+      </li>
+    </ul>
+  </div>
+  <input type="submit" class="btn btn-primary" [disabled]="!form.valid" value="Submit">
+</form>
+
