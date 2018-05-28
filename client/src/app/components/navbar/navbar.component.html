@@ -19,14 +19,20 @@
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
-        <li routerLinkActive="active">
+        <li routerLinkActive="active" *ngIf="!auth.loggedIn()">
           <a routerLink="/login">Login</a>
         </li>
-        <li routerLinkActive="active">
+        <li routerLinkActive="active" *ngIf="!auth.loggedIn()">
           <a routerLink="/register">Register</a>
         </li>
-        <li routerLinkActive="active">
-          <a href="">Contact</a>
+        <li routerLinkActive="active" *ngIf="auth.loggedIn()">
+          <a routerLink="/profile">Profile</a>
+        </li>
+        <li routerLinkActive="active" *ngIf="auth.loggedIn()">
+          <a routerLink="/dashboard">Dashboard</a>
+        </li>
+        <li routerLinkActive="active" *ngIf="auth.loggedIn()">
+          <a (click)="logOut()">Logout</a>
         </li>
       </ul>
 
