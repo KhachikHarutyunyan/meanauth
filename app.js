@@ -19,7 +19,9 @@ mongoose.connection.on('error', (err) => {
 });
 
 // dev port
-const port = 5000;
+// const port = 5000;
+// deploy Heroku
+const port = process.env.PORT || 8080;
 
 const users = require('./routes/users');
 

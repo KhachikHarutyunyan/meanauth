@@ -5,7 +5,7 @@ import { tokenNotExpired } from 'angular2-jwt';
 @Injectable()
 export class AuthService {
 
-  domain = 'http://localhost:5000/';
+  // domain = 'http://localhost:5000/';
   authToken: any;
   user: any;
 
@@ -16,13 +16,15 @@ export class AuthService {
   register(user) {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json'});
     // headers.append('Content-Type', 'application/json');
-    return this.http.post(this.domain + 'users/register', user, {headers: headers});
+    // return this.http.post(this.domain + 'users/register', user, {headers: headers});
+    // deploy heroku - udalyaem localhost iz vsex putei chtob@ podstavilsya domen iz Heroku
+    return this.http.post('users/register', user, {headers: headers});
   }
 
   login(user) {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json'});
     // headers.append('Content-Type', 'application/json');
-    return this.http.post(this.domain + 'users/authenticate', user, { headers: headers });
+    return this.http.post('users/authenticate', user, { headers: headers });
   }
 
   getProfile() {
@@ -34,7 +36,7 @@ export class AuthService {
     // headers.append('Authorization', this.authToken);
     // headers.append('Content-Type', 'application/json');
     // return this.http.get(this.domain + 'users/profile', { headers: headers });
-    return this.http.get(this.domain + 'users/profile', {
+    return this.http.get('users/profile', {
       headers: { 'Authorization': localStorage.getItem('id_token') }
     });
   }
